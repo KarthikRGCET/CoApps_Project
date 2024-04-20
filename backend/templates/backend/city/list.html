@@ -1,0 +1,57 @@
+{% extends "backend/base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+                        <div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <!-- Page-body start -->
+                                    <div class="page-body">
+                                        <!-- Basic table card start -->
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>City List</h5>
+
+                                            </div>
+                                            <div class="card-block table-border-style">
+                                                <div class="table-responsive">
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>S.No.</th>
+            <th>City Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for city in object_list %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ city.name }}</td>
+            <td>
+                <a href="{% url 'city_update' pk=city.pk %}" class="btn btn-primary">Update</a>
+                <a href="{% url 'city_delete' pk=city.pk %}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No cities found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+{% endblock %}

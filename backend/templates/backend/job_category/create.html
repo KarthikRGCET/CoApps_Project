@@ -1,0 +1,45 @@
+{% extends "backend/base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+<div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
+
+                                    <!-- Page body start -->
+                                    <div class="page-body">
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <!-- Basic Form Inputs card start -->
+                                                <div class="card">
+
+                                                    <div class="card-block">
+                                                        <h4 class="sub-title">Create Job Category </h4>
+                                                       <form method="post" action="{% url 'job_category_create' %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="mb-4">
+        {{ form.as_p }}
+    </div>
+    <div class="d-grid" style="width:100px;">
+        <button type="submit" class="btn btn-primary">Create</button>
+    </div>
+</form>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+  </div>
+
+
+
+
+{% endblock %}

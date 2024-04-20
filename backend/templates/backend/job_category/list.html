@@ -1,0 +1,58 @@
+{% extends "backend/base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+                        <div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <!-- Page-body start -->
+                                    <div class="page-body">
+                                        <!-- Basic table card start -->
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Job Category List</h5>
+
+                                            </div>
+                                            <div class="card-block table-border-style">
+                                                <div class="table-responsive">
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>S.No.</th>
+            <th>Job Category Name</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for job_category in object_list %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ job_category.job_category_name }}</td>
+            <td>
+                <a href="{% url 'job_category_update' pk=job_category.pk %}" class="btn btn-primary">Update</a>
+                <a href="{% url 'job_category_delete' pk=job_category.pk %}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3">No job categories found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+{% endblock %}

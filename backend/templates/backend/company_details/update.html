@@ -1,0 +1,50 @@
+{% extends "backend/base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+<div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <!-- Page body start -->
+                                    <div class="page-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <!-- Basic Form Inputs card start -->
+                                                <div class="card">
+                                                    <div class="card-block">
+                                                        <h4 class="sub-title">Update Company Details</h4>
+
+  <form action="" method="post" enctype="multipart/form-data">
+
+                                    {% csrf_token %}
+
+                                    {{ form.as_p }}
+
+                                    <input type="submit" value="Update" class="btn btn-primary">
+
+                                </form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+  </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<script>
+    $(function() {
+        $('.datepicker').datepicker({
+            dateFormat: 'yy-mm-dd'  // Change the date format as per your requirement
+        });
+    });
+</script>
+{% endblock %}

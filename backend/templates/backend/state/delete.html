@@ -1,0 +1,38 @@
+{% extends "backend/base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+<div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <!-- Page body start -->
+                                    <div class="page-body">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <!-- Basic Form Inputs card start -->
+                                                <div class="card">
+                                                    <div class="card-block">
+                                                        <h4 class="sub-title">Delete State Name </h4>
+
+ <form action="{% url 'state_delete' pk=object.pk %}" method="post">
+    {% csrf_token %}
+    <div class="mb-4">
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+    </div>
+    <input type="submit" value="Delete" class="btn btn-danger">
+</form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+  </div>
+
+{% endblock %}

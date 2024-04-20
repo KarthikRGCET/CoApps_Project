@@ -1,0 +1,147 @@
+{% extends "backend/base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+                        <div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <!-- Page-body start -->
+                                    <div class="page-body">
+                                        <!-- Basic table card start -->
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Company Details List</h5>
+
+                                            </div>
+                                            <div class="card-block table-border-style">
+                                                <div class="table-responsive">
+
+<!--<table class="table">-->
+<!--        <thead>-->
+<!--            <tr>-->
+<!--                <th>S.No.</th>-->
+<!--                <th>Company Name</th>-->
+<!--                <th>Company Category</th>-->
+<!--                <th>Email Address</th>-->
+<!--                <th>URL</th>-->
+
+<!--                <th>Company Description</th>-->
+<!--                <th>Req_Knowledge_Skills_Abilities</th>-->
+<!--                <th>Education Experience</th>-->
+<!--                <th>Posted Date</th>-->
+
+<!--                <th>country</th>-->
+<!--                <th>state</th>-->
+<!--                <th>city</th>-->
+<!--                <th>vacancy</th>-->
+<!--                <th>job_nature</th>-->
+<!--                <th>salary_yearly_range</th>-->
+<!--                <th>last_date_apply_application</th>-->
+<!--                &lt;!&ndash; Add more table headings for other fields as needed &ndash;&gt;-->
+<!--                <th>Action</th>-->
+<!--            </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--            {% for company_detail in object_list %}-->
+<!--            <tr>-->
+<!--                <th scope="row">{{ forloop.counter }}</th>-->
+<!--                <td>{{ company_detail.company_name }}</td>-->
+<!--                <td>{{ company_detail.company_category }}</td>-->
+<!--                <td>{{ company_detail.email_address }}</td>-->
+<!--                <td>{{ company_detail.url }}</td>-->
+
+<!--                <td>{{ company_description.url }}</td>-->
+<!--                <td>{{ req_knowledge_skills_abilities.url }}</td>-->
+<!--                <td>{{ education_experience.url }}</td>-->
+<!--                <td>{{ company_detail.posted_date }}</td>-->
+
+<!--                <td>{{ country.url }}</td>-->
+<!--                <td>{{ state.url }}</td>-->
+<!--                <td>{{ city.url }}</td>-->
+<!--                <td>{{ vacancy.url }}</td>-->
+<!--                <td>{{ job_nature.url }}</td>-->
+<!--                <td>{{ salary_yearly_range.url }}</td>-->
+<!--                <td>{{ last_date_apply_application.url }}</td>-->
+<!--                &lt;!&ndash; Add more table cells for other fields as needed &ndash;&gt;-->
+<!--                <td>-->
+<!--                    <a href="{% url 'company_details_update' pk=company_detail.pk %}" class="btn btn-primary">Update</a>-->
+<!--                    <a href="{% url 'company_details_delete' pk=company_detail.pk %}" class="btn btn-danger">Delete</a>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            {% empty %}-->
+<!--            <tr>-->
+<!--                <td colspan="7">No companies Details found.</td>-->
+<!--            </tr>-->
+<!--            {% endfor %}-->
+<!--        </tbody>-->
+<!--    </table>-->
+<table class="table">
+    <thead>
+        <tr>
+            <th>S.No.</th>
+            <th>Company Name</th>
+            <th>Company Category</th>
+            <th>Company Logo</th>
+            <th>Email Address</th>
+            <th>URL</th>
+            <th>Company Description</th>
+            <th>Req Knowledge Skills Abilities</th>
+            <th>Education Experience</th>
+            <th>Posted Date</th>
+            <th>Country</th>
+            <th>State</th>
+            <th>City</th>
+            <th>Vacancy</th>
+            <th>Job Nature</th>
+            <th>Salary Yearly Range</th>
+            <th>Last Date Apply Application</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for company_detail in object_list %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ company_detail.company_name }}</td>
+            <td>{{ company_detail.job_role }}</td>
+            <td><img src="{{ company_detail.company_logo.url }}" alt="{{ company_detail.company_name }}" style="max-width: 100px;"></td>
+            <td>{{ company_detail.email_address }}</td>
+            <td>{{ company_detail.url }}</td>
+            <td>{{ company_detail.company_description }}</td>
+            <td>{{ company_detail.req_knowledge_skills_abilities }}</td>
+            <td>{{ company_detail.education_experience }}</td>
+            <td>{{ company_detail.posted_date }}</td>
+            <td>{{ company_detail.country }}</td>
+            <td>{{ company_detail.state }}</td>
+            <td>{{ company_detail.city }}</td>
+            <td>{{ company_detail.vacancy }}</td>
+            <td>{{ company_detail.job_nature }}</td>
+            <td>{{ company_detail.salary_yearly_range }}</td>
+            <td>{{ company_detail.last_date_apply_application }}</td>
+            <td>
+                <a href="{% url 'company_details_update' pk=company_detail.pk %}" class="btn btn-primary">Update</a>
+                <a href="{% url 'company_details_delete' pk=company_detail.pk %}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="17">No companies Details found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends "backend/base.html" %}
+
+{% load static %}
+
+
+{% block content %}
+
+                        <div class="pcoded-inner-content">
+                            <!-- Main-body start -->
+                            <div class="main-body">
+                                <div class="page-wrapper">
+                                    <!-- Page-body start -->
+                                    <div class="page-body">
+                                        <!-- Basic table card start -->
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h5>Job Applied List</h5>
+
+                                            </div>
+                                            <div class="card-block table-border-style">
+                                                <div class="table-responsive">
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Degree</th>
+                <th>Passed Out Year</th>
+                <th>Skills</th>
+                <th>Posted Date</th>
+                <th>Job Category</th>
+                <th>Company Details</th>
+                <th>Resume</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for job_apply in job_apply_list %}
+            <tr>
+                <td>{{ job_apply.id }}</td>
+                <td>{{ job_apply.name }}</td>
+                <td>{{ job_apply.degree }}</td>
+                <td>{{ job_apply.passed_out_year }}</td>
+                <td>{{ job_apply.skills }}</td>
+                <td>{{ job_apply.posted_date }}</td>
+                <td>{{ job_apply.job_category }}</td>
+                <td>{{ job_apply.company_details }}</td>
+                <td><img src="{{ job_apply.resume.url }}" alt="{{ job_apply.resume }}" style="max-width: 100px;"></td>
+                <td>
+                <a href="{% url 'job_apply_delete' pk=job_apply.pk %}" class="btn btn-danger">Delete</a>
+            </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+{% endblock %}
