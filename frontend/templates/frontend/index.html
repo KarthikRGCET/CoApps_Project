@@ -1,0 +1,221 @@
+{% extends "frontend/base.html" %}
+{% load static %}
+{% block content %}
+
+<!-- Category Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore By Category</h1>
+                <!-- frontend/index.html -->
+                    <div class="row g-4">
+                        {% for job_category in job_categories %}
+                        <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
+                            <a class="cat-item rounded p-4" href="">
+                                {% if job_category.category_image %}
+                                <img src="{{ job_category.category_image.url }}" alt="Category Image" class="img-fluid mb-4">
+                                {% endif %}
+                                <h6 class="mb-3">{{ job_category.job_category_name }}</h6>
+<!--                                <p class="mb-0">{{ job_category.job_set.count }} Vacancy</p>-->
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+            </div>
+        </div>
+        <!-- Category End -->
+
+
+        <!-- About Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="row g-0 about-bg rounded overflow-hidden">
+                            <div class="col-6 text-start">
+                                <img class="img-fluid w-100" src="{% static 'frontend/img/about-1.jpg' %}">
+                            </div>
+                            <div class="col-6 text-start">
+                                <img class="img-fluid" src="{% static 'frontend/img/about-2.jpg' %}" style="width: 85%; margin-top: 15%;">
+                            </div>
+                            <div class="col-6 text-end">
+                                <img class="img-fluid" src="{% static 'frontend/img/about-3.jpg' %}" style="width: 85%;">
+                            </div>
+                            <div class="col-6 text-end">
+                                <img class="img-fluid w-100" src="{% static 'frontend/img/about-4.jpg' %}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                        <h1 class="mb-4">We Help To Get The Best Job And Find A Talent</h1>
+                        <p class="mb-4">The best talent is often found through methods such as referrals, networking and building relationships. The kind of talent you need is not always looking for work, in which case job ads are often an irrelevant way to find superior employees and should not be your only source.</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>Don’t simply give out fat bonuses for referrals.</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>Build brand awareness early on and look long term.</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>Change the way you think about hiring.</p>
+                        <p><i class="fa fa-check text-primary me-3"></i>Open up your referral programs.</p>
+                        <a class="btn btn-primary py-3 px-5 mt-3" href="">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- About End -->
+
+        <!-- Jobs Start -->
+        <div class="container-xxl py-5">
+            <div class="container">
+                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Job Listing</h1>
+                    <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+                        <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+                            <li class="nav-item">
+                                <a class="nav-link {% if job_nature == 'all' %}active{% endif %}" href="{% url 'home' %}">All</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if job_nature == 'full time' %}active{% endif %}" href="{% url 'home' %}?job_nature=full time">Full Time</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% if job_nature == 'part time' %}active{% endif %}" href="{% url 'home' %}?job_nature=part time">Part Time</a>
+                            </li>
+                        </ul>
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane fade show p-0 active">
+                            {% for company_detail in company_details %}
+                            <div class="job-item p-4 mb-4" data-job-nature="{{ company_detail.job_nature }}">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="{{ company_detail.company_logo.url }}" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-1">{{ company_detail.company_name }}</h5>
+                                            <h6 class="mb-1">{{ company_detail.job_role }}</h6>
+                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ company_detail.city }}</span>
+                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ company_detail.job_nature }}</span>
+                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ company_detail.salary_yearly_range }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                                            <a class="btn btn-primary" href="{% url 'job_detail' company_detail.id %}">Apply Now</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: {{ company_detail.last_date_apply_application }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <a class="btn btn-primary py-3 px-5" href="{% url 'job_list' %}">Browse More Jobs</a>
+                        </div>
+                         <div id="tab-2" class="tab-pane fade show p-0">
+                            {% for company_detail in company_details %}
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4" data-job-nature="{{ company_detail.job_nature }}">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="{{ company_detail.company_logo.url }}" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-1">{{ company_detail.company_name }}</h5>
+                                            <h6 class="mb-1">{{ company_detail.job_role }}</h6>
+                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ company_detail.city }}</span>
+                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ company_detail.job_nature }}</span>
+                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ company_detail.salary_yearly_range }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                                            <a class="btn btn-primary" href="{% url 'job_detail' company_detail.id %}">Apply Now</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: {{ company_detail.last_date_apply_application }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <a class="btn btn-primary py-3 px-5" href="{% url 'job_list' %}">Browse More Jobs</a>
+                        </div>
+                        <div id="tab-3" class="tab-pane fade show p-0">
+                            {% for company_detail in company_details %}
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4" data-job-nature="{{ company_detail.job_nature }}">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="{{ company_detail.company_logo.url }}" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-1">{{ company_detail.company_name }}</h5>
+                                            <h6 class="mb-1">{{ company_detail.job_role }}</h6>
+                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ company_detail.city }}</span>
+                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ company_detail.job_nature }}</span>
+                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ company_detail.salary_yearly_range }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                                            <a class="btn btn-primary" href="{% url 'job_detail' company_detail.id %}">Apply Now</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: {{ company_detail.last_date_apply_application }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <a class="btn btn-primary py-3 px-5" href="{% url 'job_list' %}">Browse More Jobs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Jobs End -->
+
+
+        <!-- Testimonial Start -->
+        <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
+            <div class="container">
+                <h1 class="text-center mb-5">Our Clients Say!!!</h1>
+                <div class="owl-carousel testimonial-carousel">
+                    <div class="testimonial-item bg-light rounded p-4">
+                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded" src="{% static 'frontend/img/testimonial-1.jpg' %}" style="width: 50px; height: 50px;">
+                            <div class="ps-3">
+                                <h5 class="mb-1">Client Name</h5>
+                                <small>Profession</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-item bg-light rounded p-4">
+                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded" src="{% static 'frontend/img/testimonial-2.jpg' %}" style="width: 50px; height: 50px;">
+                            <div class="ps-3">
+                                <h5 class="mb-1">Client Name</h5>
+                                <small>Profession</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-item bg-light rounded p-4">
+                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded" src="{% static 'frontend/img/testimonial-3.jpg' %}" style="width: 50px; height: 50px;">
+                            <div class="ps-3">
+                                <h5 class="mb-1">Client Name</h5>
+                                <small>Profession</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-item bg-light rounded p-4">
+                        <i class="fa fa-quote-left fa-2x text-primary mb-3"></i>
+                        <p>Dolor et eos labore, stet justo sed est sed. Diam sed sed dolor stet amet eirmod eos labore diam</p>
+                        <div class="d-flex align-items-center">
+                            <img class="img-fluid flex-shrink-0 rounded" src="{% static 'frontend/img/testimonial-4.jpg' %}" style="width: 50px; height: 50px;">
+                            <div class="ps-3">
+                                <h5 class="mb-1">Client Name</h5>
+                                <small>Profession</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Testimonial End -->
+
+
+
+
+{% endblock %}

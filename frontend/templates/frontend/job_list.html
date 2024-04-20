@@ -1,0 +1,127 @@
+{% extends "frontend/base.html" %}
+
+{% block content %}
+
+<div class="container-xxl py-5">
+            <div class="container">
+                <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Job Listing</h1>
+                <div class="tab-class text-center wow fadeInUp" data-wow-delay="0.3s">
+                    <ul class="nav nav-pills d-inline-flex justify-content-center border-bottom mb-5">
+                        <li class="nav-item">
+                            <a class="nav-link {% if job_nature == 'all' %}active{% endif %}" href="{% url 'job_list' %}">All</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if job_nature == 'full time' %}active{% endif %}" href="{% url 'job_list' %}?job_nature=full time">Full Time</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link {% if job_nature == 'part time' %}active{% endif %}" href="{% url 'job_list' %}?job_nature=part time">Part Time</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane fade show p-0 active">
+                            {% for company_detail in company_details %}
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="{{ company_detail.company_logo.url }}" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-1">{{ company_detail.company_name }}</h5>
+                                            <h6 class="mb-1">{{ company_detail.job_role }}</h6>
+                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ company_detail.city }}</span>
+                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ company_detail.job_nature }}</span>
+                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ company_detail.salary_yearly_range }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-light btn-square me-3" href="{% url 'job_detail' %}"><i class="far fa-heart text-primary"></i></a>
+                                            <a class="btn btn-primary" href="{% url 'job_detail' company_detail.id %}">Apply Now</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: {{ company_detail.last_date_apply_application }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+                        </div>
+                        <div id="tab-2" class="tab-pane fade p-0">
+                            {% for company_detail in company_details %}
+                            {% if company_detail.job_nature == 'full-time' %}
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="{{ company_detail.company_logo.url }}" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-1">{{ company_detail.company_name }}</h5>
+                                            <h6 class="mb-1">{{ company_detail.job_role }}</h6>
+                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ company_detail.city }}</span>
+                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ company_detail.job_nature }}</span>
+                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ company_detail.salary_yearly_range }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-light btn-square me-3" href=""><i class="far fa-heart text-primary"></i></a>
+                                            <a class="btn btn-primary" href="">Apply Now</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: {{ company_detail.last_date_apply_application }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                            <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+                        </div>
+                        <div id="tab-3" class="tab-pane fade p-0">
+                            {% for company_detail in company_details %}
+                            {% if company_detail.job_nature == 'part-time' %}
+                            <div class="job-item p-4 mb-4">
+                                <div class="row g-4">
+                                    <div class="col-sm-12 col-md-8 d-flex align-items-center">
+                                        <img class="flex-shrink-0 img-fluid border rounded" src="{{ company_detail.company_logo.url }}" alt="" style="width: 80px; height: 80px;">
+                                        <div class="text-start ps-4">
+                                            <h5 class="mb-1">{{ company_detail.company_name }}</h5>
+                                            <h6 class="mb-1">{{ company_detail.job_role }}</h6>
+                                            <span class="text-truncate me-3"><i class="fa fa-map-marker-alt text-primary me-2"></i>{{ company_detail.city }}</span>
+                                            <span class="text-truncate me-3"><i class="far fa-clock text-primary me-2"></i>{{ company_detail.job_nature }}</span>
+                                            <span class="text-truncate me-0"><i class="far fa-money-bill-alt text-primary me-2"></i>{{ company_detail.salary_yearly_range }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-4 d-flex flex-column align-items-start align-items-md-end justify-content-center">
+                                        <div class="d-flex mb-3">
+                                            <a class="btn btn-light btn-square me-3" href="{% url 'job_detail' %}"><i class="far fa-heart text-primary"></i></a>
+                                            <a class="btn btn-primary" href="{% url 'job_detail' %}">Apply Now</a>
+                                        </div>
+                                        <small class="text-truncate"><i class="far fa-calendar-alt text-primary me-2"></i>Date Line: {{ company_detail.last_date_apply_application }}</small>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                            <a class="btn btn-primary py-3 px-5" href="">Browse More Jobs</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tabLinks = document.querySelectorAll('.nav-item a');
+        tabLinks.forEach(function(tabLink) {
+            tabLink.addEventListener('click', function() {
+                const selectedTab = tabLink.getAttribute('href');
+                const jobItems = document.querySelectorAll('.job-item');
+                jobItems.forEach(function(jobItem) {
+                    jobItem.style.display = 'none';
+                });
+                const selectedJobItems = document.querySelectorAll(selectedTab + ' .job-item');
+                selectedJobItems.forEach(function(jobItem) {
+                    jobItem.style.display = 'block';
+                });
+            });
+        });
+    });
+</script>
+
+
+{% endblock %}
