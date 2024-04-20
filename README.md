@@ -17,5 +17,3 @@ Python manage.py migrate
 Python manage.py createsuperuser
 
 Python manage.py runserver
-
-Pip install pillow
