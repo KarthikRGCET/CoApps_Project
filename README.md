@@ -2,18 +2,20 @@
 
 # Dj job finder
 
-Pip install django
+# Job Portal
 
-Pip install mysqlclient
+Step 1: Pip install django
 
-Python manage.py startapp backend
+Step 2: Pip install mysqlclient
 
-Python manage.py startapp frontend
+Step 3: Python manage.py startapp backend
 
-Python manage.py makemigrations
+Step 4: Python manage.py startapp frontend
 
-Python manage.py migrate
+Step 5: Python manage.py makemigrations
 
-Python manage.py createsuperuser
+Step 6: Python manage.py migrate
 
-Python manage.py runserver
+Step 7: Python manage.py createsuperuser
+
+Step 8: Python manage.py runserver
